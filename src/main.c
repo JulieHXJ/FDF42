@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 13:49:41 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/17 17:17:46 by junjun           ###   ########.fr       */
+/*   Created: 2024/12/17 13:58:35 by junjun            #+#    #+#             */
+/*   Updated: 2024/12/17 17:50:24 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-#define FDF_H
+#include "fdf.h"
 
-#include <stdlib.h>
-#include <fcntl.h>
-#include <mlx.h>
-#include "libft/libft.h"
-
-typedef struct s_map
+void error_handle()
 {
-	int width;
-	int height;
-	int **value;
-} t_map;
+	//display mes
+	//exit
+}
 
-typedef struct s_point
+void free_table()
 {
-	int x;
-	int y;
-	int z;
-} t_point;;
+	
+}
 
+int main(int ac, char **av)
+{
+	if (ac != 2)
+	{
+		return (0);
+	}
+	
+	void *mlx;
+	void *mlx_win;
 
-#endif
+	mlx = mlx_init();
+	mlx_win = mlx_new_window()
+	
+}

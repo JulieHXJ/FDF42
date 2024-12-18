@@ -6,7 +6,19 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/17 13:58:27 by junjun           ###   ########.fr       */
+/*   Updated: 2024/12/17 17:53:17 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
+
+
+
+
+
+
+void map_error()
+{
+	//empty map
+	//Map not rectangular 
+}
