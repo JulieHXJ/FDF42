@@ -3,32 +3,49 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junjun <junjun@student.42.fr>              +#+  +:+       +#+         #
+#    By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 13:49:27 by junjun            #+#    #+#              #
-#    Updated: 2024/12/17 17:01:33 by junjun           ###   ########.fr        #
+#    Updated: 2024/12/21 19:49:23 by xhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = fdf
 
-LIBFT = libft/libft.a
-
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
 
 RM = rm -f
 
-INCLUDE = -I.
+INCLUDE = -I . -I $(LIBMLX)/include
 
 SRCS = 
 
 SRCOBJ := $(SRCS:%.c=%.o) 
 
+LIBFT = libft/libft.a
 
-.PHONY: all clean fclean re libft
+LIBMLX = ./lib/MLX42
+
+
+
+
+all: gitclone libmlx libft $(NAME)
+
+gitclone:
+    @if [ ! -d "$(LIBMLX)" ]; then \
+        echo "Cloning MLX42..."; \
+        git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+    fi
+
+libmlx: $(LIBMLX)/build/libmlx42.a
+
+$(LIBMLX)/build/libmlx42.a: $(LIBMLX)
+    @cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+
 
 all:	libft $(NAME)
 
@@ -43,6 +60,18 @@ $(NAME):	$(SRCOBJ) $(LIBFT)
 %.o:	%.c
 	@$(CC) $(CFLAGS) -Imlx $(INCLUDE) -c $< -o $@ 
 
+
+
+# %.o: %.c
+#     @$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
+# $(NAME): $(OBJS)
+#     @$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+#     @echo "Done with $(NAME)"
+
+
+
+
+
 clean:	
 	$(RM) $(SRCOBJ) 
 	@make clean -C libft
@@ -54,3 +83,5 @@ fclean: clean
 	@echo "Library has been deleted."
 
 re: fclean all 
+
+.PHONY: all clean fclean re libft
