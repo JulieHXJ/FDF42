@@ -18,6 +18,14 @@
 #include <mlx.h>
 #include "libft/libft.h"
 
+#ifndef WIN_WIDTH
+# define WIN_WIDTH 800
+# endif
+
+#ifndef WIN_HEIGHT 
+# define WIN_HEIGHT 800
+#endif
+
 typedef struct s_map
 {
 	int width;
@@ -33,5 +41,18 @@ typedef struct s_point
 	int color;
 } t_point;;
 
+typedef struct s_draw
+{
+	int	x1;
+	int	y1;
+	int x2;
+	int y2;
+	int color;
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int direc;
+} t_draw;
 
 #endif
