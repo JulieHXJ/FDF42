@@ -1,60 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 13:58:35 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/24 23:23:10 by xhuang           ###   ########.fr       */
+/*   Created: 2024/12/24 23:13:58 by xhuang            #+#    #+#             */
+/*   Updated: 2024/12/24 23:20:42 by xhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void error_handle()
+void	free_map(t_map *map)
 {
-	//display mes
-	//exit
-}
+	int i;
 
-void free_table()
-{
-	
-}
-
-
-
-
-
-
-
-int main(int ac, char **av)
-{
-	int fd;
-	t_map *map;
-	
-	if (ac != 2)
-		return (0);
-		
-	// fd = open(av[1], O_RDONLY);
-	// if (fd < 0)
-	// {
-	// 	ft_printf("Fail to open the file.\n");
-	// 	//read error
-	// }
-	map_init(av[1], &map);
-
-	
-	void *mlx;
-	void *mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window();
-
-
-
-	free_map(&map);
-	return(0);
-	
+	i = 0;
+	if (!map->value)
+		return ;
+	while (i < map->height)
+	{
+		free(map->value[i]);
+		i++;
+	}
+	free(map->value);
 }
