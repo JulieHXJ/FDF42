@@ -23,9 +23,17 @@ void free_table()
 	
 }
 
+int	check_file_name(char *s)
+{
+	int len;
+	len = ft_strlen(s);
 
-
-
+	if (ft_strncmp(s + len - 4, ".fdf", 4) == 0)
+	{
+		return (ft_printf("File name correct.\n"), 0);
+	}
+	return (ft_printf("File name incorrect!\n"), 1);
+}
 
 
 
@@ -35,8 +43,11 @@ int main(int ac, char **av)
 	t_map *map;
 	
 	if (ac != 2)
+		return (ft_printf("Wrong arguments!\n"), 0);
+	if (check_file_name(av[1]) != 0)
+	{
 		return (0);
-		
+	}	
 	// fd = open(av[1], O_RDONLY);
 	// if (fd < 0)
 	// {
