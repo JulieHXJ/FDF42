@@ -27,7 +27,7 @@ static void	free_arr(char **arr)
 	free(arr);
 }
 
-static int	read_map(const int fd, t_map *map)
+static int	map_size(const int fd, t_map *map)
 {
 	char	*line;
 	char	**points;
@@ -103,7 +103,7 @@ void	map_init(char *file, t_map *map)
 		ft_printf("Fail to open file.\n");
 		exit(EXIT_FAILURE);
 	}
-	if (read_map(fd, &map) != 0)
+	if (map_size(fd, &map) != 0)
 		map_error(map);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
