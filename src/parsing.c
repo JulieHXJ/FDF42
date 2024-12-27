@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_initi.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/24 23:26:19 by xhuang           ###   ########.fr       */
+/*   Updated: 2024/12/27 17:24:52 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ static void	free_arr(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+void map_init(t_map *map)
+{
+	map->width = 0;
+	map->height = 0;
+	map->spot = NULL;
 }
 
 static int	map_size(const int fd, t_map *map)
@@ -50,6 +57,11 @@ static int	map_size(const int fd, t_map *map)
 	return (0);
 }
 
+int	parse_color(int fd, )
+{
+	
+}
+
 static int	put_value(const int fd, t_map *map)
 {
 	char	*line;
@@ -57,8 +69,8 @@ static int	put_value(const int fd, t_map *map)
 	int		x;
 	int		y;
 
-	map->value = malloc(sizeof(int *) * map->height);
-	if (!map->value)
+	map->spot = malloc(sizeof(int *) * map->height);
+	if (!map->spot)
 		return (-1);
 	y = 0;
 	while (line = get_next_line(fd))
@@ -67,13 +79,16 @@ static int	put_value(const int fd, t_map *map)
 		free(line);
 		if (!points)
 			return (close(fd), -1);
-		map->value[y] = malloc(sizeof(int) * map->width);
-		if (!map->value[y])
-			return (free_arr(points), free_arr(map->value[y]), -1);
+		map->spot[y] = malloc(sizeof(t_point) * map->width);
+		if (!map->spot[y])
+			return (free_arr(points), free_map(map), -1);
 		x = 0;
-		while (points[x] && x < map->width)
+		while (x < map->width)
 		{
-			map->value[y][x] = ft_atoi(points[x]);
+			map->spot[y][x].x = (x - (map->width / 2)) * map->interval;
+            map->spot[y][x].y = (y - (map->height / 2)) * map->interval;
+            map->spot[y][x].z = ft_atoi(points[x]);
+            map->spot[y][x].color = parse_color(fd, map, points[x]);;
 			x++;
 		}
 		free_arr(points);
@@ -90,21 +105,27 @@ static void	map_error(t_map *map)
 	exit(EXIT_FAILURE);
 }
 
-void	map_init(char *file, t_map *map)
+void	parse_map(char *file)
 {
 	int	fd;
+	t_map *map;
 
-	map->width = 0;
-	map->height = 0;
-	map->value = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_printf("Fail to open file.\n");
 		exit(EXIT_FAILURE);
 	}
+	map = malloc(sizeof(t_map));
+	if (!map)
+	{
+		/* code */
+	}
+	
 	if (map_size(fd, &map) != 0)
 		map_error(map);
+	map->interval = find_min(WIN_WIDTH / map->width, WIN_HEIGHT / map->height) / 2;
+	map->interval = find_max(2, map->interval);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
@@ -113,4 +134,11 @@ void	map_init(char *file, t_map *map)
 	}
 	if (put_value(fd, &map) != 0)
 		map_error(map);
+}
+
+
+
+void get_value(int fd, t_point *p)
+{
+	
 }

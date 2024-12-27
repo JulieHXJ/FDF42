@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:49:41 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/24 23:22:52 by xhuang           ###   ########.fr       */
+/*   Updated: 2024/12/27 01:25:52 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 800
+#  define WIN_WIDTH 1000
 # endif
 
 # ifndef WIN_HEIGHT
@@ -40,7 +40,8 @@ typedef struct s_map
 {
 	int		width;
 	int		height;
-	int		**value;
+	double	interval;
+	t_point	**spot;
 }			t_map;
 
 typedef struct s_point
@@ -69,8 +70,8 @@ typedef struct s_fdf
 {
 	void	*mlx;
 	void	*window;
-	t_map	map;
-};
+	t_map	*map;
+}t_fdf;
 
 void	map_init(char *file, t_map *map);
 
