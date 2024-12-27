@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/27 17:24:52 by junjun           ###   ########.fr       */
+/*   Updated: 2024/12/27 17:28:22 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ static void	free_arr(char **arr)
 		i++;
 	}
 	free(arr);
-}
-
-void map_init(t_map *map)
-{
-	map->width = 0;
-	map->height = 0;
-	map->spot = NULL;
 }
 
 static int	map_size(const int fd, t_map *map)
@@ -97,14 +90,6 @@ static int	put_value(const int fd, t_map *map)
 	return (close(fd), 0);
 }
 
-static void	map_error(t_map *map)
-{
-	if (map)
-		free_map(&map);
-	ft_printf("Invalid map!\n");
-	exit(EXIT_FAILURE);
-}
-
 void	parse_map(char *file)
 {
 	int	fd;
@@ -121,7 +106,6 @@ void	parse_map(char *file)
 	{
 		/* code */
 	}
-	
 	if (map_size(fd, &map) != 0)
 		map_error(map);
 	map->interval = find_min(WIN_WIDTH / map->width, WIN_HEIGHT / map->height) / 2;
@@ -134,11 +118,4 @@ void	parse_map(char *file)
 	}
 	if (put_value(fd, &map) != 0)
 		map_error(map);
-}
-
-
-
-void get_value(int fd, t_point *p)
-{
-	
 }
