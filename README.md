@@ -42,7 +42,7 @@ y = (x + y) / 2
 main
 https://github.com/MartijnWallage/42_FdF/blob/master/inc/fdf.h
 
-
+https://git.chevro.fr/42-cestoliv/fdf/-/blob/main/src/main.c?ref_type=heads
 
 1. File Parsing:
 Parse the .fdf file to extract the 3D points (x, y, z).
