@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junjun <junjun@student.42.fr>              +#+  +:+       +#+         #
+#    By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 13:49:27 by junjun            #+#    #+#              #
-#    Updated: 2024/12/27 00:18:18 by junjun           ###   ########.fr        #
+#    Updated: 2024/12/30 16:21:39 by xhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCOBJ := $(SRCS:%.c=%.o)
 
 LIBFT = libft/libft.a
 
-LIBMLX = ./lib/MLX42
+LIBMLX = ./MLX42
 
 
 
@@ -73,7 +73,8 @@ $(NAME):	$(SRCOBJ) $(LIBFT)
 
 clean:	
 	$(RM) $(SRCOBJ) 
-	@make clean -C libft
+	@make clean -C ./libft
+	@rm -rf 
 	@echo "Object files have been deleted."
 
 fclean: clean

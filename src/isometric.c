@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   isometric.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 23:13:58 by xhuang            #+#    #+#             */
-/*   Updated: 2024/12/27 01:17:02 by junjun           ###   ########.fr       */
+/*   Created: 2024/12/30 15:59:38 by xhuang            #+#    #+#             */
+/*   Updated: 2024/12/30 15:59:39 by xhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 
-void free_map(t_map *map)
+
+void isometric_proj()
 {
-	int i;
+	//a = angle
+	destination.x = source.x * cos(a) + source.y * cos(a + 2) + source.z * cos(a - 2)
+	destination.y = source.x * sin(a) + source.y * sin(a + 2) + source.z * sin(a - 2)
 
-	i = 0;
-	if (!map->spot)
-		return;
-	while (i < map->height)
-	{
-		free(map->spot[i]);
-		i++;
-	}
-	free(map->spot);
-	map->spot = NULL;
 }

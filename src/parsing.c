@@ -6,12 +6,12 @@
 /*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/30 15:04:09 by xhuang           ###   ########.fr       */
+/*   Updated: 2024/12/30 16:02:41 by xhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-read the .fdf file and store the map data.
+parse the .fdf file and store the map data.
 */
 
 #include "fdf.h"

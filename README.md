@@ -41,3 +41,23 @@ y = (x + y) / 2
 
 main
 https://github.com/MartijnWallage/42_FdF/blob/master/inc/fdf.h
+
+
+
+1. File Parsing:
+Parse the .fdf file to extract the 3D points (x, y, z).
+Use get_next_line and ft_split from your libft to read the file and split data efficiently.
+
+2. Data Representation:
+Represent the map using a structure like t_map, which will store the grid of 3D points and metadata (e.g., dimensions).
+
+3. Projection:
+Use an isometric projection to convert the 3D points into 2D coordinates for rendering.
+
+4. Rendering:
+Use MiniLibX to render the wireframe model in a window.
+Implement smooth window management (e.g., ESC to quit, cross to close).
+
+5. User Interaction:
+Allow basic interactions like zoom, rotation, and translation of the map.
+Add controls for switching projections or adjusting parameters.
