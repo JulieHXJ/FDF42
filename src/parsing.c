@@ -3,12 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/27 17:28:22 by junjun           ###   ########.fr       */
+/*   Updated: 2024/12/30 15:04:09 by xhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+read the .fdf file and store the map data.
+*/
 
 #include "fdf.h"
 
