@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 15:08:11 by xhuang            #+#    #+#             */
-/*   Updated: 2025/01/01 20:10:35 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/01 23:24:14 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,21 @@ int	ft_atoi_base(const char *str, int str_base)
 		i++;
 	}
 	return (res * sign);
+}
+
+char	*to_lower(char *c)
+{
+	while (*c)
+	{
+		ft_tolower(*c);
+		c++;
+	}
+	return(c);
+}
+
+void	malloc_grid(t_map *map)
+{
+	int i;
+	map
+	
 }

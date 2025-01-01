@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+         #
+#    By: junjun <junjun@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 13:49:27 by junjun            #+#    #+#              #
-#    Updated: 2024/12/30 16:21:39 by xhuang           ###   ########.fr        #
+#    Updated: 2025/01/01 21:39:21 by junjun           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,17 +18,23 @@ CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
 
 RM = rm -f
 
-INCLUDE = -I . -I $(LIBMLX)/include
+HEADERS = -I. -I $(MLX_DIR)/include -I $(LIBFT_DIR)
 
-SRCS = 
+SRCS_DIR = ./src
+
+SRCS = $(SRCS_DIR)/
 
 SRCOBJ := $(SRCS:%.c=%.o) 
 
-LIBFT = libft/libft.a
+MLX_DIR		:= ./lib/MLX42
 
-LIBMLX = ./MLX42
+MLX		:= $(MLX_DIR)/build/libmlx42.a
 
+LIBFT_DIR	:= ./lib/libft
 
+LIBFT 	:= $(LIBFT_DIR)/libft.a
+
+LIBS = $(LIBFT) $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 
 all: gitclone libmlx libft $(NAME)
@@ -44,37 +50,19 @@ libmlx: $(LIBMLX)/build/libmlx42.a
 $(LIBMLX)/build/libmlx42.a: $(LIBMLX)
     @cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-
-
-all:	libft $(NAME)
-
 libft: 
 	@make -C libft/
 
-$(NAME):	$(SRCOBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(INCLUDE) $(SRCOBJ) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME):	$(SRCOBJ) 
+	$(CC) $(CFLAGS) $(LIBS) $(HEADERS) $(SRCOBJ) -o $(NAME)
 	@echo "Executable $(NAME) has been created."
 
-
-%.o:	%.c
-	@$(CC) $(CFLAGS) -Imlx $(INCLUDE) -c $< -o $@ 
-
-
-
-# %.o: %.c
-#     @$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
-# $(NAME): $(OBJS)
-#     @$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
-#     @echo "Done with $(NAME)"
-
-
-
-
+%.o: %.c
+    @$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
 
 clean:	
 	$(RM) $(SRCOBJ) 
 	@make clean -C ./libft
-	@rm -rf 
 	@echo "Object files have been deleted."
 
 fclean: clean
@@ -84,4 +72,4 @@ fclean: clean
 
 re: fclean all 
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re libft libmlx gitclone

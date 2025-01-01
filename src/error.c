@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 23:13:58 by xhuang            #+#    #+#             */
-/*   Updated: 2025/01/01 20:13:22 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/01 23:04:25 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,7 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void free_map(t_map *map)
-{
-	int i;
 
-	i = 0;
-	if (!map->spot)
-		return;
-	while (i < map->height)
-	{
-		free(map->spot[i]);
-		i++;
-	}
-	free(map->spot);
-	map->spot = NULL;
-}
 
 void error_handle(int fd, t_map *map, char *msg)
 {

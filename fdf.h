@@ -6,15 +6,15 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:49:41 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/01 20:07:07 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/01 23:23:41 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "lib/libft/libft.h"
-# include "lib/minilibx/mlx.h"
+# include "../libft/libft.h"
+# include <MLX42/MLX42.h>
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdio.h>
@@ -33,6 +33,7 @@
 # define BLUE			0x2222FF
 # define PURPLE			0xFF22FF
 # define WHITE			0xFFFFFF
+# define BLACK			0x000000
 # define GREY			0xAAAAAA
 # define DGREY			0x444444
 
@@ -73,14 +74,31 @@ typedef struct s_fdf
 	t_map	*map;
 }t_fdf;
 
-void map_init(t_map *map);
-int	check_file_name(char *s);
-int	check_color(char *str);
+//check
+int	check_filename(const char *s)
 
+
+
+//parsing file
+void map_init(t_map *map);
+int	check_color(char *str);
+void	parse_map(char *file, t_map *map);
+
+//draw line
+
+//to 3d
+
+
+//User events
+
+
+
+//error and free
 void	free_arr(char **arr);
-void    free_map(t_map *map);
+void	map_error(int fd, t_map *map, char *msg);
 
 
 int	ft_atoi_base(const char *str, int str_base);
+void	to_lower(char *c);
 
 #endif
