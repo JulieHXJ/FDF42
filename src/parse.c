@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/30 16:02:41 by xhuang           ###   ########.fr       */
+/*   Updated: 2025/01/01 20:09:45 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,25 @@ static int	map_size(const int fd, t_map *map)
 	return (0);
 }
 
-int	parse_color(int fd, )
+static int	get_color(int fd, t_map *map, char *s)
 {
+	//skip z value
+	while (*s == '-')
+		s++;
+	while (ft_isdigit(*s))
+		s++;
+	//if color not exist, return default
+	if (*s == ',')
+		s++;
+	else
+		return(0xFFFFFFFF);
+	if (check_color(s))
+	{
+		map_error
+	}
+	s = s + 2;
+	ft_toupper()
+	ft_atoi_base(s, "0123456789ABCDEF")
 	
 }
 

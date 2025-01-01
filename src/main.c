@@ -6,16 +6,25 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:35 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/27 00:57:10 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/01 20:08:38 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void error_handle()
+void map_init(t_map *map)
 {
-	//display mes
-	//exit
+	map->width = 0;
+	map->height = 0;
+	map->interval = 0;
+	map->spot = NULL;
+}
+
+void	fdf_init(t_fdf *fdf)
+{
+	fdf->map = NULL;
+	fdf->mlx = NULL;
+	fdf->window = NULL;
 }
 
 
@@ -44,7 +53,11 @@ int main(int ac, char **av)
 		return (0);
 
 	//initi fdf
-	map_init(av[1], fdf.map);
+	map_init(fdf.map);
+	
+	//parsing
+
+	//reder
 	fdf.mlx = mlx_init();
 	if (fdf.mlx == NULL)
 	{

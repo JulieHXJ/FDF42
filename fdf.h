@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:49:41 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/30 15:09:02 by xhuang           ###   ########.fr       */
+/*   Updated: 2025/01/01 20:07:07 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,14 @@ typedef struct s_fdf
 	t_map	*map;
 }t_fdf;
 
-void	map_init(char *file, t_map *map);
+void map_init(t_map *map);
+int	check_file_name(char *s);
+int	check_color(char *str);
 
+void	free_arr(char **arr);
 void    free_map(t_map *map);
+
+
+int	ft_atoi_base(const char *str, int str_base);
 
 #endif
