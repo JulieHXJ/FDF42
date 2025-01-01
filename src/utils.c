@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 15:08:11 by xhuang            #+#    #+#             */
-/*   Updated: 2025/01/01 23:24:14 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/01 23:53:29 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,3 @@ char	*to_lower(char *c)
 	return(c);
 }
 
-void	malloc_grid(t_map *map)
-{
-	int i;
-	map
-	
-}

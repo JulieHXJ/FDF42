@@ -6,24 +6,36 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:35 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/01 23:18:13 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/02 00:42:30 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-
 void	fdf_init(char *file, t_fdf *fdf)
 {
+	fdf->map = malloc(sizeof(t_map));
+	if (!fdf->map)
+	{
+		// close(fd);
+		// handle_error(MALLOC);
+	}
 	parse_map(file, fdf->map);
+	fdf->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "fdf", true);
+	if (fdf->mlx == NULL)
+	{
+		free_map(fdf->map);
+		error_handle;
+	}
+	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
+	if (fdf->window == NULL)
+	{
+		free_map(fdf->map);
+		mlx_clear_window(fdf->mlx, fdf->window);
+		error_handle;
+	}
 	
 }
-
-
-
-
-
 
 
 int main(int ac, char **av)
@@ -32,28 +44,20 @@ int main(int ac, char **av)
 	t_fdf	fdf;
 	
 	//check
-	if (ac != 2 || check_filename(av[1]) != 0)
-		return (ft_printf("Wrong input!\n"), 0);
+	if (check_file(ac, av[1]) != 0)
+		return (0);
 	//initi fdf
-	map_init(fdf.map);
-	fdf_init(av[1], fdf.map);
-	
+	fdf.map = malloc(sizeof(t_map));
+	if (/* condition */)
+	{
+		/* code */
+	}
 	//parsing
+	fdf_init(av[1], &fdf);
+	
 
 	//reder
-	fdf.mlx = mlx_init();
-	if (fdf.mlx == NULL)
-	{
-		free_map(fdf.map);
-		error_handle;
-	}
-	fdf.window = mlx_new_window(fdf.mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
-	if (fdf.window == NULL)
-	{
-		free_map(fdf.map);
-		mlx_clear_window(fdf.mlx, fdf.window);
-		error_handle;
-	}
+	
 	
 
 
@@ -63,7 +67,7 @@ int main(int ac, char **av)
 	mlx_destroy_display();
 	free(mlx);
 
-	free_map(&map);
+	free_map(fdf.map);
 	return(0);
 	
 }

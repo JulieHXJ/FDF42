@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:49:41 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/01 23:23:41 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/02 00:22:52 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define FDF_H
 
 # include "../libft/libft.h"
-# include <MLX42/MLX42.h>
+//# include <MLX42/MLX42.h>
 # include <fcntl.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -67,6 +67,18 @@ typedef struct s_line
 	int		direc;
 }			t_line;
 
+typedef struct s_img
+{
+    void    *img;
+    int     pbits;
+    int     lbytes;
+    int     endian;
+    char    *buffer;
+    int     width;
+    int     height;
+    t_point pos;
+} t_img;
+
 typedef struct s_fdf
 {
 	void	*mlx;
@@ -75,7 +87,7 @@ typedef struct s_fdf
 }t_fdf;
 
 //check
-int	check_filename(const char *s)
+int	check_file(int n, char *s);
 
 
 
@@ -100,5 +112,6 @@ void	map_error(int fd, t_map *map, char *msg);
 
 int	ft_atoi_base(const char *str, int str_base);
 void	to_lower(char *c);
+void	malloc_grid(t_map *map);
 
 #endif
