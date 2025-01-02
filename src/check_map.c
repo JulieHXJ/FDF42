@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:33:28 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/02 00:25:56 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/02 02:19:07 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_map(t_map *map)
 	int i;
 
 	i = 0;
-	if (!map->grid)
+	if (!map->grid || !map)
 		return;
 	while (i < map->height)
 	{

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:12:27 by junjun            #+#    #+#             */
-/*   Updated: 2024/12/30 16:00:27 by xhuang           ###   ########.fr       */
+/*   Updated: 2025/01/02 01:59:50 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Use Bresenham's line algorithm to draw lines between points.
 Render horizontal and vertical lines connecting adjacent points.
 Use color gradients for smooth transitions between points.
 */
-void drow_line()
+void drow_line(t_line )
 {
 	float x,y,x1,y1,x2,y2,dx,dy,step;
 	int i,gd = DETECT, gm;
@@ -40,23 +40,23 @@ void drow_line()
 
 // Step 3:
 	if(dx>=dy)
-		step=dx;
+		step = dx;
 	else
-		step=dy;
+		step = dy;
 
 // Step 4: xin = dx / step & yin = dy / step
 	dx=dx/step;
 	dy=dy/step;
 
 // Step 5: x = x1 + 0.5 & y = y1 + 0.5
-	x=x1;
-	y=y1;
+	x = x1;
+	y = y1;
 
 // Step 6: 
-	i=1;
-	while(i<=step)
+	i = 0;
+	while(i < step)
 	{
-		putpixel(x,y,5);
+		ft_put_pixel(x,y,5);
 		x=x+dx;
 		y=y+dy;
 		i=i+1;

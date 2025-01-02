@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:49:41 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/02 00:22:52 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/02 02:22:40 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define FDF_H
 
 # include "../libft/libft.h"
+# include "../minilibx/mlx.h"
 //# include <MLX42/MLX42.h>
 # include <fcntl.h>
-//# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -41,7 +41,7 @@ typedef struct s_map
 {
 	int		width;
 	int		height;
-	double	interval;
+	// double	interval;
 	t_point	**grid;
 }			t_map;
 

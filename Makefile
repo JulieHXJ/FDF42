@@ -6,7 +6,7 @@
 #    By: junjun <junjun@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 13:49:27 by junjun            #+#    #+#              #
-#    Updated: 2025/01/01 21:39:21 by junjun           ###   ########.fr        #
+#    Updated: 2025/01/02 02:24:56 by junjun           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,16 +39,16 @@ LIBS = $(LIBFT) $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 all: gitclone libmlx libft $(NAME)
 
-gitclone:
-    @if [ ! -d "$(LIBMLX)" ]; then \
-        echo "Cloning MLX42..."; \
-        git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
-    fi
+# gitclone:
+#     @if [ ! -d "$(LIBMLX)" ]; then \
+#         echo "Cloning MLX42..."; \
+#         git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+#     fi
 
-libmlx: $(LIBMLX)/build/libmlx42.a
+# libmlx: $(LIBMLX)/build/libmlx42.a
 
-$(LIBMLX)/build/libmlx42.a: $(LIBMLX)
-    @cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+# $(LIBMLX)/build/libmlx42.a: $(LIBMLX)
+#     @cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 libft: 
 	@make -C libft/

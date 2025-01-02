@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/02 00:43:37 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/02 02:17:47 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,32 @@ static int	map_size(const int fd, t_map *map)
 	return (0);
 }
 
+static int	malloc_grid(t_map *map)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	map->grid = malloc(sizeof(t_point *) * map->height);
+	if (!map->grid)
+		return (-1);
+	while (i < map->height)
+	{
+		map->grid[i] = malloc(sizeof(t_point) * map->width);
+		if (!map->grid[i])
+			return (free_map(map), -1);
+		j = 0;
+		while (j < map->width)
+		{
+			map->grid[i][j].x = j;
+			map->grid[i][j].y = i;
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 static int	put_value(const int fd, t_map *map)
 {
 	char	*line;
@@ -54,22 +80,20 @@ static int	put_value(const int fd, t_map *map)
 	int		x;
 	int		y;
 
-
+	if (malloc_grid(map) < 0)
+		return (-1);
 	y = 0;
-	while (line = get_next_line(fd))
+	while ((line = get_next_line(fd)))
 	{
 		points = ft_split(line, ' ');
 		free(line);
 		if (!points)
 			return (close(fd), -1);
-
 		x = 0;
 		while (x < map->width)
 		{
-			map->grid[y][x].x = (x - (map->width / 2)) * map->interval;
-            map->grid[y][x].y = (y - (map->height / 2)) * map->interval;
             map->grid[y][x].z = ft_atoi(points[x]);
-            // map->grid[y][x].color = get_color(fd, map, points[x]);;
+            map->grid[y][x].color = get_color(fd, map, points[x]);;
 			x++;
 		}
 		free_arr(points);
@@ -131,20 +155,4 @@ void	parse_map(char *file, t_map *map)
 	
 }
 
-void	malloc_grid(t_map *map)
-{
-	int i;
-	
-	i = 0;
-	map->grid = malloc(sizeof(t_point *) * map->height);
-	if (!map->grid)
-		return (-1);
-	while (i < map->height)
-	{
-		map->grid[i] = malloc(sizeof(t_point) * map->width);
-		if (!map->grid[i])
-			return (free_map(map), -1);
-		i++;
-	}
-	
-}
+
