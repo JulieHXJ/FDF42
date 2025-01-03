@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/02 02:17:47 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/03 00:17:53 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void map_init(t_map *map)
 	map->interval = 0;
 	map->grid = NULL;
 }
+
+
 
 static int	map_size(const int fd, t_map *map)
 {

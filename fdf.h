@@ -6,19 +6,20 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:49:41 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/02 02:22:40 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/03 00:24:35 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../libft/libft.h"
-# include "../minilibx/mlx.h"
+# include "lib/libft/libft.h"
+# include "lib/minilibx/mlx.h"
 //# include <MLX42/MLX42.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+//#include <x11/keysym.h>
 
 # ifndef WIN_WIDTH
 #  define WIN_WIDTH 1000
@@ -36,6 +37,8 @@
 # define BLACK			0x000000
 # define GREY			0xAAAAAA
 # define DGREY			0x444444
+
+# define PI				
 
 typedef struct s_map
 {

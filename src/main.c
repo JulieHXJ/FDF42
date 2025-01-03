@@ -6,7 +6,7 @@
 /*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:35 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/02 01:56:52 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/02 22:51:59 by junjun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,21 @@ void	fdf_init(char *file, t_fdf *fdf)
 		// handle_error(MALLOC);
 	}
 	parse_map(file, fdf->map);
-	fdf->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "fdf", true);
+	fdf->mlx = mlx_init();
 	if (fdf->mlx == NULL)
 	{
 		free_map(fdf->map);
+		perror()
+		exit(EXIT_FAILURE);
 		error_handle;
 	}
 	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
 	if (fdf->window == NULL)
 	{
 		free_map(fdf->map);
-		mlx_clear_window(fdf->mlx, fdf->window);
+		mlx_destroy_window(fdf->mlx, fdf->window);
+		free(fdf->mlx);
+		exit(EXIT_FAILURE)
 		error_handle;
 	}
 	
@@ -72,13 +76,30 @@ int main(int ac, char **av)
 	// mlx_loop(mlx);
 
 
-	
-	mlx_loop(mlx);
+	//mlx_pixel_put(fdf.mlx, fdf.window, y, x, 0xff0000);
+
+	mlx_key_hook(fdf.window, key_pressed, )
+	mlx_loop(fdf.mlx);
 	mlx_destroy_window(mlx, mlx_win);
 	mlx_destroy_display();
-	free(mlx);
+	free(fdf.mlx);
 
 	free_map(fdf.map);
+	return(0);
+	
+}
+
+int key_pressed(int keysym, t_fdf *fdf)
+{
+	if (keysym == xk_Escape)
+	{
+		ft_printf();
+		mlx_destroy_window(fdf->mlx, fdf->window);
+		mlx_destroy_display();
+		free(fdf->mlx);
+		exit(EXIT_FAILURE);
+	}
+	ft_printf();
 	return(0);
 	
 }
