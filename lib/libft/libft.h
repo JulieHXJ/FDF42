@@ -6,7 +6,7 @@
 /*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 18:25:39 by xhuang            #+#    #+#             */
-/*   Updated: 2024/11/29 18:05:25 by xhuang           ###   ########.fr       */
+/*   Updated: 2025/01/09 18:21:04 by xhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,5 @@ int					str_len(char *str);
 # endif
 
 char				*get_next_line(int fd);
-
 
 #endif

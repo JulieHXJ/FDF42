@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junjun <junjun@student.42.fr>              +#+  +:+       +#+         #
+#    By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 13:49:27 by junjun            #+#    #+#              #
-#    Updated: 2025/01/02 02:24:56 by junjun           ###   ########.fr        #
+#    Updated: 2025/01/09 05:15:20 by xhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,60 +14,55 @@ NAME = fdf
 
 CC = gcc
 
+# CFLAGS = -Wall -Wextra -Werror -Imlx -g libmlx42.a -Iinclude -lglfw
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
+
+
+HEADERS = -I. -I $(LIBMLX)/include
+
+SRCS = src/read_map.c src/color.c src/adj_value.c src/iso_convert.c src/draw.c src/hook.c src/error.c src/main.c
+
+SRCOBJ = $(SRCS:%.c=%.o) 
+
+LIBMLX = ./lib/MLX42
+
+LIBFT = ./lib/libft
+
+LIB = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 RM = rm -f
 
-HEADERS = -I. -I $(MLX_DIR)/include -I $(LIBFT_DIR)
-
-SRCS_DIR = ./src
-
-SRCS = $(SRCS_DIR)/
-
-SRCOBJ := $(SRCS:%.c=%.o) 
-
-MLX_DIR		:= ./lib/MLX42
-
-MLX		:= $(MLX_DIR)/build/libmlx42.a
-
-LIBFT_DIR	:= ./lib/libft
-
-LIBFT 	:= $(LIBFT_DIR)/libft.a
-
-LIBS = $(LIBFT) $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-
-
 all: gitclone libmlx libft $(NAME)
 
-# gitclone:
-#     @if [ ! -d "$(LIBMLX)" ]; then \
-#         echo "Cloning MLX42..."; \
-#         git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
-#     fi
+gitclone:	
+	@if [ ! -d "$(LIBMLX)" ]; then \
+		echo "Cloning MLX42..."; \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+	fi
 
-# libmlx: $(LIBMLX)/build/libmlx42.a
+libmlx: $(LIBMLX)/build/libmlx42.a
 
-# $(LIBMLX)/build/libmlx42.a: $(LIBMLX)
-#     @cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+$(LIBMLX)/build/libmlx42.a: $(LIBMLX)
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 libft: 
-	@make -C libft/
+	@make -C $(LIBFT)
 
 $(NAME):	$(SRCOBJ) 
-	$(CC) $(CFLAGS) $(LIBS) $(HEADERS) $(SRCOBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRCOBJ) $(LIB) $(HEADERS) -o $(NAME)
 	@echo "Executable $(NAME) has been created."
 
-%.o: %.c
-    @$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
+%.o:	%.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
 
 clean:	
 	$(RM) $(SRCOBJ) 
-	@make clean -C ./libft
+	make clean -C $(LIBFT)
 	@echo "Object files have been deleted."
 
 fclean: clean
 	$(RM) $(NAME)
-	@make fclean -C libft
+	make fclean -C $(LIBFT)
 	@echo "Library has been deleted."
 
 re: fclean all 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junjun <junjun@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:26 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/03 00:17:53 by junjun           ###   ########.fr       */
+/*   Updated: 2025/01/10 16:04:33 by xhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,28 @@ parse the .fdf file and store the map data.
 
 #include "fdf.h"
 
-void map_init(t_map *map)
+char	**get_arr(char *str)
 {
-	map->width = 0;
-	map->height = 0;
-	map->interval = 0;
-	map->grid = NULL;
+	char	**points;
+	char	*trimmed;
+
+	trimmed = ft_strtrim(str, " \t\n");
+	points = ft_split(trimmed, ' ');
+	free(trimmed);
+	if (!points)
+		return (NULL);
+	return (points);
 }
 
-
-
-static int	map_size(const int fd, t_map *map)
+static int	get_size(const int fd, t_map *map)
 {
 	char	*line;
 	char	**points;
 
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while ((line))
 	{
-		points = ft_split(line, ' ');
+		points = get_arr(line);
 		free(line);
 		if (!points)
 			return (close(fd), -1);
@@ -44,6 +48,7 @@ static int	map_size(const int fd, t_map *map)
 		}
 		free_arr(points);
 		map->height++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (0);
@@ -51,9 +56,9 @@ static int	map_size(const int fd, t_map *map)
 
 static int	malloc_grid(t_map *map)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	map->grid = malloc(sizeof(t_point *) * map->height);
 	if (!map->grid)
@@ -82,79 +87,44 @@ static int	put_value(const int fd, t_map *map)
 	int		x;
 	int		y;
 
-	if (malloc_grid(map) < 0)
-		return (-1);
 	y = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while ((line))
 	{
-		points = ft_split(line, ' ');
+		points = get_arr(line);
 		free(line);
 		if (!points)
-			return (close(fd), -1);
-		x = 0;
-		while (x < map->width)
+			return (error_handle(fd, map, "malloc fail in put value"), -1);
+		x = -1;
+		while (++x < map->width)
 		{
-            map->grid[y][x].z = ft_atoi(points[x]);
-            map->grid[y][x].color = get_color(fd, map, points[x]);;
-			x++;
+			map->grid[y][x].z = ft_atoi(points[x]);
+			map->grid[y][x].color = get_color(fd, map, points[x]);
 		}
 		free_arr(points);
 		y++;
+		line = get_next_line(fd);
 	}
 	return (close(fd), 0);
 }
 
-static int	get_color(int fd, t_map *map, char *s)
-{
-	while (*s == '-')
-		s++;
-	while (ft_isdigit(*s))
-		s++;
-	if (*s == ',')
-		s++;
-	else
-		return(0xFFFFFFFF);
-	if (check_color(s))
-        return (map_error(fd, map), -1);
-	s = s + 2;
-	to_lower(s);
-	return (ft_atoi_base(s, "01234567890abcdef") << 8 | 0xFF);
-}
-
-
-void	parse_map(char *file, t_map *map)
+int	read_map(char *file, t_map *map)
 {
 	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
-		// perror("Fail to open file.\n");
-		// free_map
-		// exit(EXIT_FAILURE);
-	}
+		return (error_handle(fd, map, "Failed to open file"), 1);
 	map_init(map);
-	if (map_size(fd, map) != 0)
-		map_error(fd, map);
-
-
-
-	malloc_grid(map);
-
-	
-	// map->interval = find_min(WIN_WIDTH / map->width, WIN_HEIGHT / map->height) / 2;
-	// map->interval = find_max(2, map->interval);
+	if (get_size(fd, map) != 0)
+		return (close(fd), 1);
+	if (malloc_grid(map) < 0)
+		return (1);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_printf("Fail to re-open file.\n");
-		map_error(fd, map);
-	}
-	if (put_value(fd, &map) != 0)
-		map_error(fd, map);
+		return (error_handle(fd, map, "Failed to open file"), 1);
+	if (put_value(fd, map) != 0)
+		return (error_handle(fd, map, "put z value failed"), 1);
 	close(fd);
-	parse_color()
-	
+	return (0);
 }
-
-
