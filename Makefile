@@ -6,9 +6,13 @@
 #    By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 13:49:27 by junjun            #+#    #+#              #
-#    Updated: 2025/01/09 05:15:20 by xhuang           ###   ########.fr        #
+#    Updated: 2025/01/10 19:15:16 by xhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# vpath %.c src
+# vpath %.c lib
+
 
 NAME = fdf
 
@@ -23,6 +27,7 @@ HEADERS = -I. -I $(LIBMLX)/include
 SRCS = src/read_map.c src/color.c src/adj_value.c src/iso_convert.c src/draw.c src/hook.c src/error.c src/main.c
 
 SRCOBJ = $(SRCS:%.c=%.o) 
+# SRCOBJ = $(addprefix /$())
 
 LIBMLX = ./lib/MLX42
 

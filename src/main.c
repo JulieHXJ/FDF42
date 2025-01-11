@@ -6,7 +6,7 @@
 /*   By: xhuang <xhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:58:35 by junjun            #+#    #+#             */
-/*   Updated: 2025/01/10 16:08:00 by xhuang           ###   ########.fr       */
+/*   Updated: 2025/01/10 19:43:29 by xhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static int	check_file(int n, char *s)
 	int	fd;
 	int	len;
 
-	len = ft_strlen(s);
 	if (n != 2)
 	{
 		perror("Wrong arguments!\n");
 		exit(EXIT_FAILURE);
 	}
+	len = ft_strlen(s);
 	if (len < 4 || ft_strncmp(s + len - 4, ".fdf", 4) != 0)
 	{
 		perror("File name incorrect!\n");
@@ -97,6 +97,7 @@ int	main(int ac, char **av)
 	mlx_image_to_window(fdf->mlx, fdf->img->mlx_img, 0, 0);
 	mlx_key_hook(fdf->mlx, handle_key, fdf);
 	mlx_scroll_hook(fdf->mlx, mouse_scroll, fdf);
+	// mlx_loop_hook();
 	mlx_loop(fdf->mlx);
 	mlx_terminate(fdf->mlx);
 	return (free_fdf(fdf), EXIT_SUCCESS);
